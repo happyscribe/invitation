@@ -28,6 +28,7 @@ module Invitation
       return if invite.nil?
       invitable = invite.invitable
       invitable.add_invited_user self
+      invitable.change_user_role(self, invite.role) if invite.role.present?
       invite.recipient = self
       invite.save
     end

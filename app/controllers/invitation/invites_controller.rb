@@ -65,7 +65,7 @@ module Invitation
     end
 
     def invite_params
-      params[:invite] ? params.require(:invite).permit(:invitable_id, :invitable_type, :email, emails: []) : {}
+      params[:invite] ? params.require(:invite).permit(:invitable_id, :invitable_type, :email, :role, emails: []) : {}
     end
   end
 end
