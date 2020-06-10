@@ -7,6 +7,7 @@ class CreateInvites < ActiveRecord::Migration<%= migration_version %>
       t.integer :recipient_id
       t.integer :invitable_id
       t.string  :invitable_type
+      t.string  :role
       t.timestamps
       t.index :email
       t.index :token

@@ -14,6 +14,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'factory_girl'
 require 'timecop'
+require 'pry'
 
 Rails.backtrace_cleaner.remove_silencers!
 

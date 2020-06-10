@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160303214941) do
     t.integer  "recipient_id"
     t.integer  "invitable_id"
     t.string   "invitable_type"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["email"], name: "index_invites_on_email"

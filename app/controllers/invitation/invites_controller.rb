@@ -44,7 +44,7 @@ module Invitation
         format.json do
           if failures.empty?
             # If we received a single email, json response should be a scalar, not an array.
-            invites = params[:invite].key?('email') ? invites.first : invites
+            invites = params[:invite].key?('email') && params[:invite][:email].index(',').blank? ? invites.first : invites
             render json: invites.as_json(except: [:token, :created_at, :updated_at]), status: 201
           else
             render json: {
