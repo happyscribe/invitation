@@ -9,6 +9,7 @@ module Invitation
     def after_invite_existing_user(invite)
       # Add the user to the invitable resource/organization
       invite.invitable.add_invited_user(invite.recipient)
+      invite.invitable.change_user_role(invite.recipient, invite.role) if invite.role.present?
     end
 
     # Override if you want to do something more complicated for new users.
