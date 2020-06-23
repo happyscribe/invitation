@@ -39,7 +39,7 @@ module Invitation
           else
             flash[:error] = t('invitation.flash.invite_error', count: failures.count, email: failures.to_sentence)
           end
-          redirect_to url_after_invite(invites.first) # FIXME: redirect to back
+          redirect_back(fallback_location: url_after_invite(invites.first))
         end
         format.json do
           if failures.empty?
