@@ -20,6 +20,9 @@ class Invite < ActiveRecord::Base
   validates :email, presence: true
   validates :invitable, presence: true
   validates :sender, presence: true
+  validate :organization_workspace_can_only_invite_members
+  validate :not_duplicated
+
 
   def existing_user?
     recipient != nil
@@ -38,5 +41,19 @@ class Invite < ActiveRecord::Base
 
   def set_email_case
     email.downcase! unless Invitation.configuration.case_sensitive_email
+  end
+
+  def organization_workspace_can_only_invite_members
+    return if invitable.class != Team
+    return if invitable.organization.blank?
+    unless invitable.organization.users.where(email: "#{email.strip}").count > 0
+      errors.add(:email, "doesn't correspond to an organization member.")
+    end
+  end
+
+  def not_duplicated
+    if invitable.users.where(email: email).count > 0
+      errors.add(:user, "is already a member.")
+    end
   end
 end
